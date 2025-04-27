@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { BotIcon, UserIcon } from 'lucide-react';
+import { TypingEffect } from './typing-effect';
 
 type Message = {
   id: string;
@@ -32,7 +33,8 @@ function MessageComponent({ message }: MessageProps) {
             : 'bg-muted rounded-tl-none',
         )}
       >
-        {message.content}
+        {/* {message.content} */}
+        {isUser ? message.content : <TypingEffect text={message.content} />}
       </div>
 
       {isUser && (

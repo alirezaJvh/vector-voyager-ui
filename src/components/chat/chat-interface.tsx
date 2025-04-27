@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { PaperclipIcon, SendIcon } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { SendIcon } from 'lucide-react';
 import { MessageComponent, Message } from '@/components/chat/message';
 import { MessageLoading } from '@/components/chat/message/loading';
 
@@ -12,8 +12,6 @@ export default function ChatInterface() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Auto-scroll to bottom of messages
   useEffect(() => {
@@ -21,7 +19,7 @@ export default function ChatInterface() {
   }, [messages]);
 
   const handleSendMessage = () => {
-    if (input.trim() === '' && !selectedFile) return;
+    // if (input.trim() === '' && !selectedFile) return;
 
     // Add user message
     const userMessage: Message = {
@@ -34,7 +32,7 @@ export default function ChatInterface() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
-    setSelectedFile(null);
+    // setSelectedFile(null);
 
     // Simulate assistant response after a delay
     setTimeout(() => {
@@ -56,10 +54,6 @@ export default function ChatInterface() {
       e.preventDefault();
       handleSendMessage();
     }
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
   };
 
   const emptyState = useMemo(() => {
@@ -94,30 +88,22 @@ export default function ChatInterface() {
 
       <div className="border-t p-4">
         <div className="mx-auto max-w-3xl">
-          <div className="flex gap-2">
-            <Button size="icon" variant="outline" onClick={triggerFileInput} className="shrink-0">
-              <PaperclipIcon className="h-4 w-4" />
-            </Button>
-            <div className="relative flex-1">
-              <Input
+          <div className="relative">
+            <div className="bg-background relative rounded-xl border shadow-sm">
+              <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
-                className="pr-10"
+                className="max-h-[200px] min-h-[60px] resize-none rounded-xl p-3 pr-10 text-base focus-visible:ring-offset-0"
+                rows={1}
               />
-              {selectedFile && (
-                <div className="text-muted-foreground mt-2 flex items-center gap-2 text-sm">
-                  <PaperclipIcon className="h-3 w-3" />
-                  <span className="truncate">{selectedFile.name}</span>
-                </div>
-              )}
             </div>
             <Button
               size="icon"
               onClick={handleSendMessage}
-              disabled={input.trim() === '' && !selectedFile}
-              className="shrink-0"
+              disabled={input.trim() === ''}
+              className="absolute right-3 bottom-3 h-8 w-8"
             >
               <SendIcon className="h-4 w-4" />
             </Button>

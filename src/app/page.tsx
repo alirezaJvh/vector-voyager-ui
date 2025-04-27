@@ -10,16 +10,6 @@ import {
 import { FileUploader } from '@/components/file-uploader';
 
 export default async function Home() {
-  // const data = await fetch("http://localhost:3000/api/upload", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     name: "test",
-  //     content: "test",
-  //   }),
-  // });
   return (
     <div className="flex h-screen w-full overflow-hidden">
       <Suspense fallback={<div>Loading...</div>}>
