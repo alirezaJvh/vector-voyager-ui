@@ -1,10 +1,30 @@
-import { Button } from '@/components/ui/button';
+import { Suspense } from 'react';
+import ChatInterface from '@/components/chat/chat-interface';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarProvider,
+} from '@/components/ui/sidebar';
+import { FileUploader } from '@/components/file-uploader';
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      salam
-      <Button>button</Button>
+    <div className="flex h-screen w-full overflow-hidden">
+      <Suspense fallback={<div>Loading...</div>}>
+        <SidebarProvider>
+          <Sidebar className="border-r">
+            <SidebarContent className="px-2">
+              <SidebarGroup>
+                <SidebarGroupLabel>Uploaded Files</SidebarGroupLabel>
+                <FileUploader />
+              </SidebarGroup>
+            </SidebarContent>
+          </Sidebar>
+          <ChatInterface />
+        </SidebarProvider>
+      </Suspense>
     </div>
   );
 }
