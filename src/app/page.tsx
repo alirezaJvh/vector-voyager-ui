@@ -8,6 +8,7 @@ import {
   SidebarProvider,
 } from '@/components/ui/sidebar';
 import { FileUploader } from '@/components/file-uploader';
+import { ChatProvider } from '@/context/chat';
 
 export default async function Home() {
   return (
@@ -22,7 +23,9 @@ export default async function Home() {
               </SidebarGroup>
             </SidebarContent>
           </Sidebar>
-          <ChatInterface />
+          <ChatProvider>
+            <ChatInterface />
+          </ChatProvider>
         </SidebarProvider>
       </Suspense>
     </div>

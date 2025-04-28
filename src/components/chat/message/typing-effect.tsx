@@ -10,20 +10,16 @@ interface TypingEffectProps {
 export function TypingEffect({ text, typingSpeed = 30 }: TypingEffectProps) {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  //   const [isComplete, setIsComplete] = useState(false);
   const words = useRef<string[]>([]);
 
   useEffect(() => {
     words.current = text.split(' ');
     setDisplayedText('');
     setCurrentIndex(0);
-    // setIsComplete(false);
   }, [text]);
 
-  // Typing effect
   useEffect(() => {
     if (currentIndex >= words.current.length) {
-      //   setIsComplete(true);
       return;
     }
 

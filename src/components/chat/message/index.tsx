@@ -9,7 +9,6 @@ type Message = {
   timestamp: Date;
 };
 
-// Message Component with Avatar
 interface MessageProps {
   message: Message;
 }
@@ -33,7 +32,6 @@ function MessageComponent({ message }: MessageProps) {
             : 'bg-muted rounded-tl-none',
         )}
       >
-        {/* {message.content} */}
         {isUser ? message.content : <TypingEffect text={message.content} />}
       </div>
 
