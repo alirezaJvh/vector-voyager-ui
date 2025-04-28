@@ -9,8 +9,9 @@ export async function uploadFile(params: UploadFileParams) {
   formData.append('file', params.file);
   formData.append('review_header', params.reviewColumn);
   formData.append('product_id_header', params.productId);
-
-  const response = await fetch('/api/v1/upload', {
+  console.log('@@@@@ here @@@');
+  console.log(process.env.NEXT_PUBLIC_API_URL);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
     method: 'POST',
     body: formData,
     headers: {
