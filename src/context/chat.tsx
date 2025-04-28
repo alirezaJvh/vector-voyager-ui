@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 interface ChatContextProps {
   messages: Message[];
-  setMessages: (messages: Message[]) => void;
+  setMessages: (messages: Message[] | ((prev: Message[]) => Message[])) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
 }

@@ -5,8 +5,6 @@ type UploadFileParams = {
 };
 
 export async function uploadFile(params: UploadFileParams) {
-  console.log('####### Processing upload request #####');
-  console.log(params);
   const formData = new FormData();
   formData.append('file', params.file);
   formData.append('review_header', params.reviewColumn);
@@ -19,13 +17,8 @@ export async function uploadFile(params: UploadFileParams) {
       accept: 'application/json',
     },
   });
-  //   console.log("####### Upload response #####");
-  //   console.log(response.status);
   const data = await response.json();
-  //   console.log("####### Upload response #####");
-  //   console.log(data);
   if (response.status !== 200) {
-    // Promise.reject(data.detail);
     throw new Error(data.detail);
   }
   return data;

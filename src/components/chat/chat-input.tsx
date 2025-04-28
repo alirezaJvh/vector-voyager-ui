@@ -1,22 +1,17 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { SendIcon } from 'lucide-react';
 import { Message } from './message';
 import { useChatContext } from '@/context/chat';
+import { sendMessage } from '@/lib/sendMessage';
 
 function ChatInput() {
   const { setMessages, setIsLoading } = useChatContext();
 
   const [input, setInput] = useState('');
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = useCallback(async () => {
     const userMessage: Message = {
       id: Date.now().toString(),
       content: input,
@@ -24,24 +19,35 @@ function ChatInput() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-
-    // Simulate assistant response after a delay
-    setTimeout(() => {
+    try {
+      // TODO: add typing
+      setIsLoading(true);
+      setInput('');
+      setMessages((prev) => [...prev, userMessage]);
+      const response = await sendMessage(input);
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content:
-          'This is a simulated response. In a real application, this would be the response from your AI model.',
+        content: response.response,
         role: 'assistant',
         timestamp: new Date(),
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (e) {
+      console.error(e);
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  };
+    }
+  }, [input, setMessages, setIsLoading]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    },
+    [handleSendMessage],
+  );
 
   return (
     <div className="p-4">
