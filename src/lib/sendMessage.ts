@@ -7,8 +7,6 @@ export async function sendMessage(message: string, kTop: number) {
     body: JSON.stringify({ query: message, top_k: kTop }),
   });
   const data = await response.json();
-  console.log('@@@@@@@@@@@@ here @@@@@@@@@@');
-  console.log(data);
   if (response.status !== 200) {
     throw new Error(data.detail);
   }

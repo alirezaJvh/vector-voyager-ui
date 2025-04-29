@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vector Voyager UI
+
+A modern, interactive RAG (Retrieval-Augmented Generation) interface built with Next.js that allows users to upload documents, ask questions, and receive AI-powered responses based on the document content.
+
+![Vector Voyager UI](public/vector-voyager-screenshot.png)
+
+## Features
+
+- **Document Upload**: Upload CSV files with review data and specify column mappings
+- **Interactive Chat Interface**: Communicate with an AI assistant that uses your uploaded documents as context
+- **Responsive Design**: Built with a modern UI using Tailwind CSS and Radix UI components
+- **Top-K Configuration**: Control the number of similar documents retrieved for each query
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **UI Components**: Radix UI, Tailwind CSS
+- **Form Handling**: React Hook Form, Zod validation
+- **Notifications**: Sonner toast notifications
+- **Containerization**: Docker and Docker Compose
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 21+ (recommended: use the version specified in `.nvmrc`)
+- npm, yarn, or pnpm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone https://github.com/yourusername/vector-voyager-ui.git
+   cd vector-voyager-ui
+   ```
 
-## Learn More
+2. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Create a `.env` file in the root directory with the following content:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```
+   API_URL="http://localhost:8000/api/v1"
+   ```
 
-## Deploy on Vercel
+4. Start the development server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start the development server with Turbopack
+- `npm run build` - Build the application for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint to check for code issues
+- `npm run format` - Check code formatting with Prettier
+- `npm run format:fix` - Fix code formatting issues with Prettier
+
+### Code Quality Tools
+
+This project uses several tools to ensure code quality:
+
+- **ESLint**: For code linting
+- **Prettier**: For code formatting
+- **Husky**: For git hooks
+- **lint-staged**: For running linters on staged files
+- **commitlint**: For commit message validation
+
+## Deployment
+
+### Using Docker
+
+1. Build the Docker image:
+
+   ```bash
+   docker build -t vector-voyager-ui .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 3000:3000 vector-voyager-ui
+   ```
+
+### Using Docker Compose
+
+1. Start the application with Docker Compose:
+   ```bash
+   docker-compose up
+   ```
+
+### Deploying to Production
+
+The application can be deployed to any platform that supports Next.js applications, such as Vercel, Netlify, or a custom server.
+
+For Vercel deployment:
+
+1. Push your code to a GitHub repository
+2. Import the project in Vercel
+3. Configure environment variables
+4. Deploy
+
+## API Configuration
+
+The application communicates with a backend API for document processing and chat functionality. The API URL is configured in the `.env` file and used in the Next.js configuration for API rewrites.
