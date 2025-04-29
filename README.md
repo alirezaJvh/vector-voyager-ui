@@ -105,18 +105,3 @@ This project uses several tools to ensure code quality:
    ```bash
    docker-compose up
    ```
-
-### Deploying to Production
-
-The application can be deployed to any platform that supports Next.js applications, such as Vercel, Netlify, or a custom server.
-
-For Vercel deployment:
-
-1. Push your code to a GitHub repository
-2. Import the project in Vercel
-3. Configure environment variables
-4. Deploy
-
-## API Configuration
-
-The application communicates with a backend API for document processing and chat functionality. The API URL is configured in the `.env` file and used in the Next.js configuration for API rewrites.
