@@ -2,7 +2,7 @@
 
 A modern, interactive RAG (Retrieval-Augmented Generation) interface built with Next.js that allows users to upload documents, ask questions, and receive AI-powered responses based on the document content.
 
-![Vector Voyager UI](public/vector-voyager-screenshot.png)
+![Vector Voyager UI](public/vector-voyager.png)
 
 ## Features
 
