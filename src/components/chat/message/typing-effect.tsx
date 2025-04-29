@@ -13,7 +13,7 @@ export function TypingEffect({ text, typingSpeed = 30 }: TypingEffectProps) {
   const words = useRef<string[]>([]);
 
   useEffect(() => {
-    words.current = text.split(' ');
+    words.current = text?.split(' ') || [];
     setDisplayedText('');
     setCurrentIndex(0);
   }, [text]);
