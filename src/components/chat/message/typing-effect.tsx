@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-
+import ReactMarkdown from 'react-markdown';
 interface TypingEffectProps {
   text: string;
   typingSpeed?: number;
@@ -31,5 +31,5 @@ export function TypingEffect({ text, typingSpeed = 30 }: TypingEffectProps) {
     return () => clearTimeout(timer);
   }, [currentIndex, typingSpeed]);
 
-  return <>{displayedText}</>;
+  return <ReactMarkdown>{displayedText}</ReactMarkdown>;
 }

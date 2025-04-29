@@ -34,8 +34,8 @@ export default function ChatInterface() {
           {!messages.length && emptyState}
           {!!messages.length && (
             <div className="space-y-6">
-              {messages.map((message) => (
-                <MessageComponent key={message.id} message={message} />
+              {messages.map((message, index) => (
+                <MessageComponent key={index} message={message} />
               ))}
               {isLoading && <MessageLoading />}
               <div ref={messagesEndRef} />
