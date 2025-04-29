@@ -9,7 +9,8 @@ export async function uploadFile(params: UploadFileParams) {
   formData.append('file', params.file);
   formData.append('review_header', params.reviewColumn);
   formData.append('product_id_header', params.productId);
-  const response = await fetch(`api/v1/upload`, {
+  console.log(formData);
+  const response = await fetch(`api/upload`, {
     method: 'POST',
     body: formData,
     headers: {
