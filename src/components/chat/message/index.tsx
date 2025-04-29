@@ -3,10 +3,8 @@ import { BotIcon, UserIcon } from 'lucide-react';
 import { TypingEffect } from './typing-effect';
 
 type Message = {
-  id: string;
   content: string;
   role: 'user' | 'assistant';
-  timestamp: Date;
 };
 
 interface MessageProps {

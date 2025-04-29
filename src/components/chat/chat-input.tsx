@@ -11,33 +11,29 @@ function ChatInput() {
 
   const [input, setInput] = useState('');
 
-  const handleSendMessage = useCallback(async () => {
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: input,
-      role: 'user',
-      timestamp: new Date(),
+  const createMessage = useCallback((role: 'user' | 'assistant', content: string) => {
+    return {
+      content,
+      role,
     };
+  }, []);
+
+  const handleSendMessage = useCallback(async () => {
+    const userMessage: Message = createMessage('user', input);
 
     try {
-      // TODO: add typing
       setIsLoading(true);
       setInput('');
       setMessages((prev) => [...prev, userMessage]);
       const response = await sendMessage(input);
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: response.response,
-        role: 'assistant',
-        timestamp: new Date(),
-      };
+      const assistantMessage: Message = createMessage('assistant', response.response);
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (e) {
       console.error(e);
     } finally {
       setIsLoading(false);
     }
-  }, [input, setMessages, setIsLoading]);
+  }, [input, createMessage, setMessages, setIsLoading]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {

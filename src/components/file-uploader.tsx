@@ -36,14 +36,11 @@ function FileUploader() {
   const [isUploading, setIsUploading] = useState(false);
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      console.log(e.target.files);
       setSelectedFile(e.target.files[0]);
     }
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    console.log(selectedFile);
     try {
       if (selectedFile) {
         setIsUploading(true);
@@ -52,8 +49,10 @@ function FileUploader() {
           reviewColumn: values.reviewColumn,
           productId: values.productIdColumn,
         });
+        toast.success('File uploaded successfully');
+      } else {
+        toast.error('Please select a file');
       }
-      toast.success('File uploaded successfully');
     } catch (e) {
       const error = e as Error;
       toast.error(error.message);
@@ -107,7 +106,11 @@ function FileUploader() {
           <div className="">
             <Input type="file" onChange={handleFileUpload} />
           </div>
-          <Button type="submit" className="w-full cursor-pointer justify-start gap-2">
+          <Button
+            disabled={isUploading}
+            type="submit"
+            className="w-full cursor-pointer justify-start gap-2"
+          >
             {isUploading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
