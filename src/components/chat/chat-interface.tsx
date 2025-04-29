@@ -3,7 +3,7 @@
 import { useRef, useEffect, useMemo } from 'react';
 import { MessageComponent } from '@/components/chat/message';
 import { MessageLoading } from '@/components/chat/message/loading';
-import { ChatInput } from './chat-input';
+import { ChatInput } from './chat-input/input';
 import { useChatContext } from '@/context/chat';
 
 export default function ChatInterface() {
